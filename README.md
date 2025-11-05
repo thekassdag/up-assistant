@@ -1,3 +1,5 @@
+<img width="1920" height="852" alt="Screenshot from 2025-11-05 16-52-22" src="https://github.com/user-attachments/assets/a67d0a20-95fc-47ec-b570-db1e5754c749" />
+
 # University Placement Assistant (up assistant)
 
 A web-based system built to simplify the student university placement process.
