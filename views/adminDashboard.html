@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Admin - UP Assistant</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename = './vendor/sweetalert2/sweetalert2.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename = './vendor/fontAws/css/all.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename = './vendor/css/session.v4.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename = './vendor/DataTables-1.13.2/css/dataTables.bootstrap4.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename = './vendor/css/main.bundle.min.css')}}"
+    />
+  </head>
+  <style>
+    .subheader .subheader-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+    }
+  </style>
+  <style>
+    .uv-info i {
+      font-size: 15px;
+      padding-right: 10px;
+      color: blue;
+      margin-top: 15px;
+    }
+  </style>
+  <style>
+    select.custom-select.custom-select-sm.form-control.form-control-sm {
+      width: 50px;
+    }
+  </style>
+
+  <body>
+    <div class="main-content-body">
+      <!-- Start:: content (Your custom content)-->
+      <div class="subheader pb-0 pt-0 px-lg">
+        <div class="subheader-container">
+          <div class="subheader-main d-lg-flex">
+            <img
+              src="{{url_for('static',filename = './img/upAssistantLogo-icon.png')}}"
+              height="100"
+            />
+
+            <h3 class="subheader-title">
+              UP
+              <span class="text-blue">Assistant</span>
+            </h3>
+          </div>
+          <div class="flex-grow-1"></div>
+          <div class="subheader-toolbar">
+            <a
+              href="{{ url_for('logout',logoutFrom='admin') }}"
+              class="btn bg-primary text-white"
+            >
+              Logout
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="py-xxl bg-card">
+        <div class="container">
+          <div class="d-flex mb-xl">
+            <div class="w-full">
+              <div class="d-flex align-items-sm-center">
+                <div class="mr-xl">
+                  <h4 class="m-0 d-flex align-items-center">
+                    UP Assistant Admin
+                  </h4>
+                  <div class="d-flex mb-sm mt-2">
+                    <p class="m-0 mr-xl">
+                      {# total std #}
+                      <span class="font-weight-semi">{{data.numStd}}</span>
+                      <span class="text-small text-muted">
+                        <span class="badge badge-primary">
+                          <i class="fa-solid fa-user-group"></i>
+                          (Students)
+                        </span>
+                      </span>
+                    </p>
+                    <p class="m-0 mr-xl">
+                      {# total std submitted theri updata #}
+                      <span class="font-weight-semi">{{data.totalUPSubmittedStd}}</span>
+                      <span class="text-small text-muted">
+                        <span class="badge badge-success">
+                          <i class="fa-solid fa-check"></i>
+                          (submitted)
+                        </span>
+                      </span>
+                    </p>
+                    <p class="m-0 mr-xl">
+                      {# total std not submitted their upData #}
+                      <span class="font-weight-semi">{{data.totalUPNotSubmittedStd}}</span>
+                      <span class="text-small text-muted">
+                        <span class="badge badge-danger">
+                          <i class="fa-solid fa-x"></i>
+                          (not submitted)
+                        </span>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt--xxl mb-xxxl px-lg position-relative z-index-default">
+        <div class="container">
+          <div class="nav-tabs-primary">
+            <ul class="nav nav-tabs mb-xl" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="pill" href="#allUv">
+                  <i class="fa-solid fa-user-group"></i>
+                  Student List
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#naturalStdUPDataTable">
+                  <i class="fa-solid fa-list-ol"></i>
+                  Natural UP-List
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#socialStdUPDataTable">
+                  <i class="fa-solid fa-list-ol"></i>
+                  Social UP-List
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div
+                class="tab-pane fade show active mb-3"
+                id="allUv"
+                role="tabpanel"
+              >
+                <div class="acction-btn d-flex m-3">
+                  
+                  <div id="importStudentData" class="btn bg-primary text-white">
+                    <i class="fa-solid fa-file-import"></i>
+                    <span class="ml-1">Import</span>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="card-header">
+                    <h2 class="p-1 m-0 text-16 font-weight-semi">
+                      Student In the System
+                    </h2>
+                  </div>
+                  <div class="card table-responsive p-3">
+                    <table
+                      id="stdListTable"
+                      class="table table-striped"
+                      style="width: 100%;"
+                    >
+                      <thead>
+                        <tr>
+                          <th>#ID</th>
+                          <th>Name</th>
+                          <th>Stream</th>
+                          <th>UP Status</th>
+                        </tr>
+                      </thead>
+                      <tbod>
+                        {% if data.stdList != 0 %}
+                          {% for std in data.stdList %}
+                          <tr>
+                            {# 2.id #}
+                            <td>{{ std[2] }}</td>
+                            {# 1.name #}
+                            <td>{{ std[1] }}</td>
+                            {# 1.stream #}
+                            <td>{{ std[3]}}</td>
+                            <td>
+                              {% with upStatus = data.upStatusOfStd(std[2]) %}
+                                {% if(upStatus > 0) %}
+                                  <span class="badge badge-success">
+                                    <i class="fa-solid fa-check"></i>
+                                  </span>
+                                {% else %}
+                                  <span class="badge badge-danger">
+                                    <i class="fa-solid fa-x"></i>
+                                  </span>
+                                {% endif %}
+
+                              {% endwith %}
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        {% endif %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>#ID</th>
+                          <th>Name</th>
+                          <th>Stream</th>
+                          <th>UP Status</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="naturalStdUPDataTable" role="tabpanel">
+                <div class="acction-btn d-flex m-3">
+                  <div id="export-natural-std" class="btn bg-primary text-white">
+                    <i class="fa-solid fa-file-export"></i>
+                    <span class="ml-1">Export</span>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="card-header">
+                    <h2 class="p-1 m-0 text-16 font-weight-semi">Student Up</h2>
+                  </div>
+                  <div class="card table-responsive p-3">
+                    <table
+                      id="naturalStdUPDataListTable"
+                      class="table table-striped"
+                      style="width: 100%;"
+                    >
+                      <thead>
+                        <tr>
+                          <th class="UPTableCol">#ID</th>
+                          <th class="UPTableCol">Name</th>
+                          {# natural uv abbrnam colum#}
+                          {%  with naturalUvs = data2.getUvFor('n') %}
+                             {% for naturalUv in naturalUvs %}
+                                <th class="UPTableCol">{{naturalUv[2]}}</th>
+                             {% endfor %}
+                          {%  endwith %}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% with UPSubmittedNStds = data2.getUPSubmittedStd('n') %}
+                          {% for UPSubmittedNStd in UPSubmittedNStds %}
+                            <tr>
+                              <td class="UPTableRow">{{UPSubmittedNStd[0]}}</td>
+                              <td class="UPTableRow">{{UPSubmittedNStd[1]}}</td>
+                                {% with upOrderOfStd = data2.getStdUpOrder(UPSubmittedNStd[0])%}
+                                  {% for upOrder in upOrderOfStd %}
+                                    <td class="UPTableRow">
+                                      <span class="badge badge-rounded badge-info">
+                                        {{upOrder[0]}}
+                                      </span>
+                                    </td>
+                                  {% endfor %}
+                              {% endwith %}
+                            </tr>
+                          {% endfor %}
+                        {% endwith %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th class="UPTableCol">#ID</th>
+                          <th class="UPTableCol">Name</th>
+                          {# natural uv abbrnam colum#}
+                          {%  with naturalUvs = data2.getUvFor('n') %}
+                             {% for naturalUv in naturalUvs %}
+                                <th class="UPTableCol">{{naturalUv[2]}}</th>
+                             {% endfor %}
+                          {%  endwith %}
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="socialStdUPDataTable" role="tabpanel">
+                <div class="acction-btn d-flex m-3">
+                  <div id="export-social-std" class="btn bg-primary text-white">
+                    <i class="fa-solid fa-file-export"></i>
+                    <span class="ml-1">Export</span>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="card-header">
+                    <h2 class="p-1 m-0 text-16 font-weight-semi">Student Up</h2>
+                  </div>
+                  <div class="card table-responsive p-3">
+                    <table
+                      id="socialStdUPDataListTable"
+                      class="table table-striped"
+                      style="width: 100%;"
+                    >
+                      <thead>
+                        <tr>
+                          <th class="UPTableCol">#ID</th>
+                          <th class="UPTableCol">Name</th>
+                          {# social uv abbrnam colum#}
+                          {%  with socialUvs = data2.getUvFor('s') %}
+                             {% for socialUv in socialUvs %}
+                                <th class="UPTableCol">{{socialUv[2]}}</th>
+                             {% endfor %}
+                          {%  endwith %}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% with UPSubmittedSStds = data2.getUPSubmittedStd('s') %}
+                          {% for UPSubmittedSStd in UPSubmittedSStds %}
+                            <tr>
+                              <td class="UPTableRow">{{UPSubmittedSStd[0]}}</td>
+                              <td class="UPTableRow">{{UPSubmittedSStd[1]}}</td>
+                                {% with upOrderOfStd = data2.getStdUpOrder(UPSubmittedSStd[0])%}
+                                  {% for upOrder in upOrderOfStd %}
+                                    <td class="UPTableRow">
+                                      <span class="badge badge-rounded badge-info">
+                                        {{upOrder[0]}}
+                                      </span>
+                                    </td>
+                                  {% endfor %}
+                              {% endwith %}
+                            </tr>
+                          {% endfor %}
+                        {% endwith %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>#ID</th>
+                          <th>Name</th>
+                          {# social uv abbrnam colum#}
+                          {%  with socialUvs = data2.getUvFor('s') %}
+                             {% for socialUv in socialUvs %}
+                                <th class="UPTableCol">{{socialUv[2]}}</th>
+                             {% endfor %}
+                          {%  endwith %}
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{{url_for('static',filename = './vendor/js/vendors.bundle.min.js')}}"></script>
+    <script src="{{url_for('static',filename = './vendor/js/main.bundle.min.js')}}"></script>
+    <script src="{{url_for('static',filename = './vendor/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url_for('static',filename = './vendor/DataTables-1.13.2/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{url_for('static',filename = './vendor/sweetalert2/sweetalert2.min.js')}}"></script>
+    <script src="{{url_for('static',filename = './js/admin_page.js')}}"></script>
+    {# flash msg from importStdList route #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for flashCatg,flashMsg in messages %}
+          <script>
+            Swal.fire({
+              position: 'top-end',
+              icon: '{{flashCatg}}',
+              text: '{{flashMsg}}',
+              showConfirmButton: false,
+              timer: 3000,
+            })
+          </script>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+  </body>
+</html>

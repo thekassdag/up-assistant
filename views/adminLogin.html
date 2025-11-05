@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Login - Admin</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename = './vendor/css/session.v4.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename = './vendor/css/main.bundle.min.css')}}"
+    />
+  </head>
+  <style>
+    .pt-lg,
+    .py-lg {
+      padding-top: 3.5rem !important;
+    }
+  </style>
+
+  <body>
+    <div class="signup4-wrap">
+      <div class="signup4-container">
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="row m-0">
+              <div
+                class="col-md-6 d-flex justify-content-center p-xxl gray-300"
+              >
+                <img
+                  src="{{url_for('static',filename = './img/upAssistantLogo.png')}}"
+                />
+              </div>
+              <div class="col-md-6 py-lg">
+                <h3 class="format-title">Admin Login</h3>
+                {% if formError['usernameOrPwdError'] != '' %}
+                <div class="help-block">
+                  <ul role="alert">
+                    <li>
+                      {{formError['usernameOrPwdError']}}
+                    </li>
+                  </ul>
+                </div>
+
+                {% endif %}
+                <form action="{{ url_for('adminLogin') }}" method="post">
+                  <span class="bmd-form-group">
+                    <div class="input-group input-light mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        placeholder="Username"
+                      />
+                    </div>
+                  </span>
+                  {% if formError['username'] != '' %}
+                  <div class="help-block">
+                    <ul role="alert">
+                      <li>
+                        {{formError['username']}}
+                      </li>
+                    </ul>
+                  </div>
+                  {% endif %}
+                  <span class="bmd-form-group">
+                    <div class="input-group input-light mb-3">
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        placeholder="Password"
+                      />
+                    </div>
+                  </span>
+                  {% if formError['password'] != '' %}
+                  <div class="help-block">
+                    <ul role="alert">
+                      <li>
+                        {{formError['password']}}
+                      </li>
+                    </ul>
+                  </div>
+                  {% endif %}
+
+                  <div class="d-flex">
+                    <button
+                      type="submit"
+                      class="btn btn-raised btn-raised-primary mr-md"
+                    >
+                      Login
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

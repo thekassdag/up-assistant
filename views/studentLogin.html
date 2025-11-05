@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Login - Student</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename = './vendor/css/session.v4.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename = './vendor/css/main.bundle.min.css')}}"
+    />
+  </head>
+  <style>
+    .pt-lg,
+    .py-lg {
+      padding-top: 3.5rem !important;
+    }
+  </style>
+
+  <body>
+    <div class="signup4-wrap">
+      <div class="signup4-container">
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="row m-0">
+              <div
+                class="col-md-6 d-flex justify-content-center p-xxl gray-300"
+              >
+                <img
+                  src="{{url_for('static',filename = './img/upAssistantLogo.png')}}"
+                />
+              </div>
+              <div class="col-md-6 py-lg">
+                <h3 class="form-title">Student Login</h3>
+                <form action="{{ url_for('studentLogin') }}" method="post">
+                  <span class="bmd-form-group">
+                    <div class="input-group input-light mb-3">
+                      <input
+                        type="text"
+                        name="id"
+                        class="form-control"
+                        placeholder="ID e.g:- 798132"
+                      />
+                    </div>
+                  </span>
+                  {% if formError['id'] != '' %}
+                  <div class="help-block">
+                    <ul role="alert">
+                      <li>
+                        {{formError['id']}}
+                      </li>
+                    </ul>
+                  </div>
+                  {% endif %}
+                  <span class="bmd-form-group">
+                    <div class="input-group input-light mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="fullName"
+                        placeholder="FullName"
+                      />
+                    </div>
+                  </span>
+                  {% if formError['fullName'] != '' %}
+                  <div class="help-block">
+                    <ul role="alert">
+                      <li>
+                        {{formError['fullName']}}
+                      </li>
+                    </ul>
+                  </div>
+                  {% endif %}
+
+                  <div class="d-flex">
+                    <button
+                      type="submit"
+                      class="btn btn-raised btn-raised-primary mr-md"
+                    >
+                      Login
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
