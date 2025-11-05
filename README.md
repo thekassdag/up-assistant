@@ -1,5 +1,4 @@
-<img width="1920" height="1920" alt="upAssistantLogo" src="https://github.com/user-attachments/assets/ce83199f-0d89-479b-889d-d4e093b3e630" />
-
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/lgV1Cg7WsLs/0.jpg)](https://www.youtube.com/watch?v=lgV1Cg7WsLs)
 # University Placement Assistant (up assistant)
 
 A web-based system built to simplify the student university placement process.
@@ -46,15 +45,32 @@ gunicorn app:app --bind 0.0.0.0:5000 --workers 3
 gunicorn app:app --bind 0.0.0.0:$PORT --workers 3
 ```
 
-## Usage(local test urls)
-student portal:
-👉 `http://{domain}:{prot}`
 
-admin pannel:
-👉 `http://{domain}:{prot}/admin`
+Here’s a cleaner and more readable version of your section while keeping your original tone and intent:
 
-username: upadmin
-password: upadmin123
+---
+
+## 🚀 Usage (Local Test URLs)
+
+1. **Login as Admin**
+   Go to:
+   👉 `http://{domain}:{port}/admin`
+
+   ```
+   username: upadmin  
+   password: upadmin123  
+   ```
+
+2. **Get a Sample Student**
+   From the admin panel, copy any sample student’s full name and ID.
+
+3. **Login as Student**
+   Visit:
+   👉 `http://{domain}:{port}/login/student/`
+   Use the copied full name and ID to log in and explore the student portal.
+
+
+
 
 
 
