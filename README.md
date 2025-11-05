@@ -10,18 +10,18 @@ Originally developed in high school to replace manual paper submissions and Exce
 * **Automation:** Generates ready-to-submit Excel files for ministry upload.
 * **Error Prevention:** Eliminates mismatched or missing student choices through digital verification.
 
-## Setup and Installation
+## Setup and Installation(linux/ubuntu)
 
 1. **Create a virtual environment**
 
    ```bash
-   python3 -m venv .
+   python3 -m venv .venv
    ```
 
 2. **Activate the virtual environment**
 
    ```bash
-   source bin/activate
+   source .venv/bin/activate
    ```
 
 3. **Install dependencies**
