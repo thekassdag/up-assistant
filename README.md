@@ -1,4 +1,4 @@
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/lgV1Cg7WsLs/0.jpg)](https://www.youtube.com/watch?v=lgV1Cg7WsLs)
+
 # University Placement Assistant (up assistant)
 
 A web-based system built to simplify the student university placement process.
